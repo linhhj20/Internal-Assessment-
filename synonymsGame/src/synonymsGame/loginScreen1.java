@@ -4,9 +4,24 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JPasswordField;
+import javax.swing.JPanel;
+import java.awt.Canvas;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import java.io.File; 
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class loginScreen1 {
 
@@ -84,5 +99,34 @@ public class loginScreen1 {
 		txtPassword.setFont(new Font("Verdana", Font.PLAIN, 15));
 		txtPassword.setBounds(231, 363, 130, 26);
 		frame.getContentPane().add(txtPassword);
+		
+		JLabel lbl_profilePic = new JLabel("");
+		lbl_profilePic.setBounds(181, 83, 268, 139);
+		frame.getContentPane().add(lbl_profilePic);
+		
+		JButton btn_browseImageFiles = new JButton("Browse Image");
+		btn_browseImageFiles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser browseImages = new JFileChooser(); 
+				
+				//Offer different image options; filter image extensions
+				FileNameExtensionFilter fnef = new FileNameExtensionFilter("IMAGES", "png", "jpeg", "jpg"); 
+				browseImages.addChoosableFileFilter(fnef);
+				int showOpenDialogue = browseImages.showOpenDialog(null);
+				if(showOpenDialogue == JFileChooser.APPROVE_OPTION) {
+					File selectedImageFile = browseImages.getSelectedFile();
+					String selectedImagePath = selectedImageFile.getAbsolutePath(); 
+					JOptionPane.showMessageDialog(null, selectedImagePath);
+					
+					//Display chosen image  
+					ImageIcon ii = new ImageIcon(selectedImagePath); 
+					//Resizes chosen image
+					Image pfp = ii.getImage().getScaledInstance(lbl_profilePic.getWidth(), lbl_profilePic.getHeight(), Image.SCALE_SMOOTH);
+					lbl_profilePic.setIcon(new ImageIcon(pfp));
+				}
+			}
+		});
+		btn_browseImageFiles.setBounds(30, 139, 117, 29);
+		frame.getContentPane().add(btn_browseImageFiles);
 	}
 }
