@@ -3,10 +3,8 @@ package synonymsGame;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.Font;
 
-public class testModeScreen3 {
+public class learnModeScreen4 {
 
 	private JFrame frame;
 
@@ -17,7 +15,7 @@ public class testModeScreen3 {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					testModeScreen3 window = new testModeScreen3();
+					learnModeScreen4 window = new learnModeScreen4();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -29,7 +27,7 @@ public class testModeScreen3 {
 	/**
 	 * Create the application.
 	 */
-	public testModeScreen3() {
+	public learnModeScreen4() {
 		initialize();
 	}
 
@@ -40,16 +38,10 @@ public class testModeScreen3 {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 650, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JButton btn_goBack = new JButton("BACK");
-		btn_goBack.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btn_goBack.setBounds(6, 6, 117, 29);
-		frame.getContentPane().add(btn_goBack);
 	}
 
 	public void setVisible(boolean b) {
-
+		
 		
 	}
 

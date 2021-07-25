@@ -1,110 +1,79 @@
 package synonymsGame;
 
-import java.awt.EventQueue;
+import java.awt.BorderLayout;
+import java.awt.Window; 
+import java.awt.FlowLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
-import java.awt.Font;
-import java.awt.Toolkit;
-
-import javax.swing.JEditorPane;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
-public class chooseOptionScreen2 {
+public class chooseOptionScreen2 extends JDialog {
 
-	private JFrame frame;
-	private JButton btn_testMode;
+	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					chooseOptionScreen2 window = new chooseOptionScreen2();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			chooseOptionScreen2 dialog = new chooseOptionScreen2();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Create the application.
+	 * Create the dialog.
 	 */
 	public chooseOptionScreen2() {
-		initialize();
+		setBounds(100, 100, 650, 500);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setLayout(new FlowLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER); 
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
+			{
+				JButton testModeButton = new JButton("TEST");
+				testModeButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						testModeScreen3 tms3 = new testModeScreen3(); 
+						tms3.setVisible(true); 
+					}
+				});
+				testModeButton.setActionCommand("TEST");
+				buttonPane.add(testModeButton);
+				getRootPane().setDefaultButton(testModeButton);
+			}
+			{
+				JButton learnModeButton = new JButton("LEARN");
+				learnModeButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						learnModeScreen4 lms4 = new learnModeScreen4(); 
+						lms4.setVisible(true); 
+					}
+				});
+				learnModeButton.setActionCommand("LEARN");
+				buttonPane.add(learnModeButton);
+			}
+			
+			//Prompt user
+			Object[] options = {"TEST", "LEARN"}; 
+			Object pane = JOptionPane.showOptionDialog(null, "Choose 1 out of 2 options!", "OPTIONS", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]); 
+			Object chosenOption = ((JOptionPane) pane).getValue(); 		
+			
+		}
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 650, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JLabel lbl_profilePic = new JLabel("");
-		lbl_profilePic.setBounds(183, 34, 268, 139);
-		frame.getContentPane().add(lbl_profilePic);
-		
-		JButton btn_goBack = new JButton("BACK");
-		btn_goBack.setBounds(6, 6, 117, 29);
-		frame.getContentPane().add(btn_goBack);
-		
-		JLabel lbl_message = new JLabel("Choose 'TEST' mode to play the game or 'LEARN' mode to know more synonyms!");
-		lbl_message.setFont(new Font("Verdana", Font.PLAIN, 15));
-		lbl_message.setBounds(16, 262, 614, 56);
-		frame.getContentPane().add(lbl_message);
-		
-		JLabel lbl_username = new JLabel("");
-		lbl_username.setFont(new Font("Verdana", Font.PLAIN, 15));
-		lbl_username.setBounds(234, 221, 145, 29);
-		frame.getContentPane().add(lbl_username);
-		
-		btn_testMode = new JButton("TEST");
-		btn_testMode.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Close previous window
-				close(); 
-				
-				//Open TEST mode frame
-				testModeScreen3 tsm = new testModeScreen3(); 
-				tsm.setVisible(true);				
-			}
-		});
-		btn_testMode.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btn_testMode.setBounds(95, 365, 117, 29);
-		frame.getContentPane().add(btn_testMode);
-		
-		JButton btn_learnMode = new JButton("LEARN");
-		btn_learnMode.setBounds(406, 366, 117, 29);
-		frame.getContentPane().add(btn_learnMode);
-		
-		JButton btn_closeFrame = new JButton("CLOSE");
-		btn_closeFrame.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				close(); 
-			}
-		});
-		btn_closeFrame.setFont(new Font("Verdana", Font.PLAIN, 15));
-		btn_closeFrame.setBounds(126, 6, 117, 29);
-		frame.getContentPane().add(btn_closeFrame);
-		
-		Object[] options = {"TEST", "LEARN"}; 
-		JOptionPane.showOptionDialog(null, "Choose 'TEST' mode to play the game or 'LEARN' mode to know more synonyms!", "OPTIONS", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
-		
-	}
 	
-	public void close() {
-		WindowEvent closeWindow = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
-	}
 }

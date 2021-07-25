@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,6 +22,7 @@ import javax.swing.JFileChooser;
 import java.io.File; 
 
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class loginScreen1 {
@@ -128,5 +130,15 @@ public class loginScreen1 {
 		});
 		btn_browseImageFiles.setBounds(30, 139, 117, 29);
 		frame.getContentPane().add(btn_browseImageFiles);
+			
+		}
+	
+		
+		//public void close() {
+		//WindowEvent closeWindow = new WindowEvent(frame, WindowEvent.WINDOW_CLOSING);
+		//Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+		//}
+		
+		
 	}
-}
+
